@@ -7,7 +7,7 @@
 
 extension MainViewController {
     func separateItems () {
-        for item in AppData.items {
+        for item in AppData.shared.items {
             if item.status {
                 doneItems.append(item)
             } else {

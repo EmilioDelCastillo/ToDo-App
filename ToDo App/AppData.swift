@@ -6,9 +6,21 @@
 //
 
 import Foundation
+import Firebase
 
 class AppData {
-    static var items: Array<Item>!
+    static let shared = AppData()
+    
+    var authentication: Auth!
+    var rootNode: DatabaseReference!
+    
+    var items: Array<Item>!
+    
+    init() {
+        FirebaseApp.configure()
+        authentication = Auth.auth()
+        rootNode = Database.database().reference()
+    }
     
     class func populate()  {
         let item1 = Item(name: "Tap to deactivate", status: false)
@@ -16,6 +28,6 @@ class AppData {
         let item3 = Item(name: "Milk", status: true)
         let item4 = Item(name: "Bread", status: false)
         
-        items = [item1, item2, item3, item4]
+        AppData.shared.items = [item1, item2, item3, item4]
     }
 }

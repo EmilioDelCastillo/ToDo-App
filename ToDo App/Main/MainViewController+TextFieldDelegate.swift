@@ -25,11 +25,11 @@ extension MainViewController: UITextFieldDelegate {
             
             // Do not allow duplicates. If the user enters a duplicate, it will be moved to the top and
             // marked as not done yet
-            if let index = AppData.items.firstIndex(where: {$0.name.lowercased() == newName.lowercased()}){
+            if let index = AppData.shared.items.firstIndex(where: {$0.name.lowercased() == newName.lowercased()}){
                 
-                if AppData.items[index].status { // If it's done
-                    AppData.items[index].status = false
-                    let doneIndex = doneItems.firstIndex(where: {$0.name.lowercased() == AppData.items[index].name.lowercased()})!
+                if AppData.shared.items[index].status { // If it's done
+                    AppData.shared.items[index].status = false
+                    let doneIndex = doneItems.firstIndex(where: {$0.name.lowercased() == AppData.shared.items[index].name.lowercased()})!
                     let thisItem = doneItems[doneIndex]
                     thisItem.status = false
                     
@@ -37,7 +37,7 @@ extension MainViewController: UITextFieldDelegate {
                     doneItems.remove(at: doneIndex)
                     
                 } else {
-                    let activeIndex = activeItems.firstIndex(where: {$0.name.lowercased() == AppData.items[index].name.lowercased()})!
+                    let activeIndex = activeItems.firstIndex(where: {$0.name.lowercased() == AppData.shared.items[index].name.lowercased()})!
                     let thisItem = activeItems[activeIndex]
                     activeItems.insert(thisItem, at: 0)
                     activeItems.remove(at: activeIndex + 1)
@@ -50,7 +50,7 @@ extension MainViewController: UITextFieldDelegate {
             
             let newItem = Item(name: newName, status: false)
             
-            AppData.items.append(newItem)
+            AppData.shared.items.append(newItem)
             activeItems.insert(newItem, at: 0)
             
             tableView.performBatchUpdates {

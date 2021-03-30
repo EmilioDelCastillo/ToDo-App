@@ -27,7 +27,7 @@ extension MainViewController {
         
        
         let thisItem = (indexPath.section == 0) ? activeItems[indexPath.row] : doneItems[indexPath.row]
-        // let thisItem = AppData.items[indexPath.row]
+        // let thisItem = AppData.shared.items[indexPath.row]
         
         let attrString = NSMutableAttributedString(string: thisItem.name)
         

@@ -20,7 +20,7 @@ class ReadWrite {
         do {
             
             // There must be something to write
-            guard let items = AppData.items else { return }
+            guard let items = AppData.shared.items else { return }
             
             let archiver = try NSKeyedArchiver.archivedData(withRootObject: items, requiringSecureCoding: false)
             try archiver.write(to: dataFile)
@@ -37,16 +37,16 @@ class ReadWrite {
             
             do {
                 if let readArray = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [Item] {
-                    AppData.items = readArray
+                    AppData.shared.items = readArray
                 }
                 
             } catch {
                 print(error)
-                AppData.items = []
+                AppData.shared.items = []
             }
             
         } else {
-            AppData.items = []
+            AppData.shared.items = []
             return
         }
     }

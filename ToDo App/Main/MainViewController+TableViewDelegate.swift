@@ -28,10 +28,10 @@ extension MainViewController {
         }
         
         // Remove it from AppData too
-        let deleteIndex = AppData.items.firstIndex { (item) -> Bool in
+        let deleteIndex = AppData.shared.items.firstIndex { (item) -> Bool in
             return item.name == name
         }!
-        AppData.items.remove(at: deleteIndex)
+        AppData.shared.items.remove(at: deleteIndex)
         ReadWrite.write()
         tableView.deleteRows(at: [indexPath], with: .left)
     }
@@ -61,8 +61,8 @@ extension MainViewController {
         }
         
         // Update the model
-        if let index = AppData.items.firstIndex(where: {$0.name == thisItem.name}) {
-            AppData.items[index] = thisItem
+        if let index = AppData.shared.items.firstIndex(where: {$0.name == thisItem.name}) {
+            AppData.shared.items[index] = thisItem
             ReadWrite.write()
         }
     }
