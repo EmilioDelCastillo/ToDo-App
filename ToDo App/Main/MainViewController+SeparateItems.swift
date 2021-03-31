@@ -7,6 +7,10 @@
 
 extension MainViewController {
     func separateItems () {
+        // Empty the arrays just in case, in order to avoid duplicates and a whole lot of crashes
+        doneItems.removeAll()
+        activeItems.removeAll()
+        
         for item in AppData.shared.items {
             if item.status {
                 doneItems.append(item)

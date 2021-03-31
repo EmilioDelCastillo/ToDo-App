@@ -30,12 +30,26 @@ class MainViewController: UITableViewController {
             defaults.synchronize()
             AppData.shared.populate()
             ReadWrite.write()
+            separateItems()
             
         } else {
-            ReadWrite.read()
+            AppData.shared.readAll { (found) in
+                if found {
+                    // The items for the logged in user are set
+                    self.separateItems()
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                    
+                } else {
+                    ReadWrite.read()
+                    self.separateItems()
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                }
+            }
         }
-        
-        separateItems()
         
         tableView.tableHeaderView = headerView
         newItemTextField.delegate = self

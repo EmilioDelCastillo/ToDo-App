@@ -13,6 +13,7 @@ extension AppData {
         
         authentication.signIn(withEmail: email, password: password) { (result, error) in
             if error == nil {
+                
                 completion(true)
             } else {
                 print(error!.localizedDescription)

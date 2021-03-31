@@ -28,6 +28,16 @@ extension MainViewController {
             
             AppData.shared.logIn(email: email, password: password) { (result) in
                 if result {
+                    // Update the user items
+                    AppData.shared.readAll { (found) in
+                        if found {
+                            self.separateItems()
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
+                            }
+                        }
+                    }
+                    
                     self.userButton.tintColor = .green
                 } else {
                     self.userButton.tintColor = .red

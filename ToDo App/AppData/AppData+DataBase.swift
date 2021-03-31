@@ -48,4 +48,34 @@ extension AppData {
         
         rootNode.child("data").child(id).child(item.name.lowercased()).removeValue()
     }
+    
+    /**
+     Fetches all the content of the logged in user from the Firebase database
+     */
+    typealias found = Bool
+    func readAll(completion: @escaping (found) -> Void) {
+        guard let id = authentication.currentUser?.uid else {
+            completion(false)
+            return
+        }
+        
+        rootNode.child("data").child(id).observeSingleEvent(of: .value) { (snapshot) in
+            guard let content = (snapshot.value as? NSDictionary)?.allValues else {
+                completion(false)
+                return
+            }
+            
+            do {
+                let data = try JSONSerialization.data(withJSONObject: content, options: .prettyPrinted)
+                
+                let decoder = JSONDecoder()
+                let foundItems = try decoder.decode([Item].self, from: data)
+                self.items = foundItems
+                completion(true)
+                
+            } catch {
+                print(error)
+            }
+        }
+    }
 }
