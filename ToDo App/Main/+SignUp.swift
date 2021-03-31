@@ -27,9 +27,12 @@ extension MainViewController {
             let password = registerAlert.textFields![1].text!
             
             AppData.shared.signUp(email: email, password: password) { (result) in
-                if result {
+                switch result {
+                case .success(_):
                     self.userButton.tintColor = .green
-                } else {
+                    
+                case .failure(let error):
+                    self.handleError(error)
                     self.userButton.tintColor = .red
                 }
             }

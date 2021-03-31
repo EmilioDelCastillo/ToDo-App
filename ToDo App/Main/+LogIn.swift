@@ -27,7 +27,8 @@ extension MainViewController {
             let password = loginAlert.textFields![1].text!
             
             AppData.shared.logIn(email: email, password: password) { (result) in
-                if result {
+                switch result {
+                case .success(_):
                     // Update the user items
                     AppData.shared.readAll { (found) in
                         if found {
@@ -37,9 +38,10 @@ extension MainViewController {
                             }
                         }
                     }
-                    
                     self.userButton.tintColor = .green
-                } else {
+                    
+                case .failure(let error):
+                    self.handleError(error)
                     self.userButton.tintColor = .red
                 }
             }
