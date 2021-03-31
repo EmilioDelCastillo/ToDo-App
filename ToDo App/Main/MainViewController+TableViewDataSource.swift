@@ -35,13 +35,13 @@ extension MainViewController {
             
             attrString.addAttribute(.strikethroughStyle, value: 2.0, range: NSMakeRange(0, attrString.length))
 
-            cell.backgroundColor = .lightGray
+            cell.backgroundColor = .systemBackground
             cell.accessoryType = .checkmark
         } else {
             // Because the table view dequeues cells, we need to remove this attribute when it is not needed
             attrString.removeAttribute(.strikethroughStyle, range: NSMakeRange(0, attrString.length))
             
-            cell.backgroundColor = .white
+            cell.backgroundColor = .systemBackground
             cell.accessoryType = .none
         }
         
