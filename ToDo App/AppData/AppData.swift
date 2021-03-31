@@ -31,15 +31,3 @@ class AppData {
         AppData.shared.items = [item1, item2, item3, item4]
     }
 }
-
-extension AppData {
-    func writeItem(_ item: Item) {
-        guard let id = authentication.currentUser?.uid else {
-            return
-        }
-        
-        let update = ["/data/\(id)/\(item.name.lowercased())" : item.dictionary]
-        rootNode.updateChildValues(update)
-        
-    }
-}

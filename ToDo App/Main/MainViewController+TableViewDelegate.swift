@@ -31,8 +31,12 @@ extension MainViewController {
         let deleteIndex = AppData.shared.items.firstIndex { (item) -> Bool in
             return item.name == name
         }!
+        let itemToDelete = AppData.shared.items[deleteIndex]
         AppData.shared.items.remove(at: deleteIndex)
+        
+        AppData.shared.deleteItem(item: itemToDelete)
         ReadWrite.write()
+        
         tableView.deleteRows(at: [indexPath], with: .left)
     }
 
