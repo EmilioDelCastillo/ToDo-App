@@ -22,12 +22,24 @@ class AppData {
         rootNode = Database.database().reference()
     }
     
-    class func populate()  {
+    func populate()  {
         let item1 = Item(name: "Tap to deactivate", status: false)
         let item2 = Item(name: "Swipe left to delete", status: false)
         let item3 = Item(name: "Milk", status: true)
         let item4 = Item(name: "Bread", status: false)
         
         AppData.shared.items = [item1, item2, item3, item4]
+    }
+}
+
+extension AppData {
+    func writeItem(_ item: Item) {
+        guard let id = authentication.currentUser?.uid else {
+            return
+        }
+        
+        let update = ["/data/\(id)/\(item.name.lowercased())" : item.dictionary]
+        rootNode.updateChildValues(update)
+        
     }
 }

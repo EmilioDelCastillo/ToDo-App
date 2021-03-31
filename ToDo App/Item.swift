@@ -13,6 +13,9 @@ class Item: NSObject, NSCoding {
         True means done.
      */
     var status: Bool!
+    var dictionary: [String: Any] {
+        return ["name": name!, "status": status!]
+    }
     
     func encode(with coder: NSCoder) {
         coder.encode(name, forKey: "name")

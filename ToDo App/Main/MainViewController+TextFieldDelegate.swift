@@ -26,8 +26,8 @@ extension MainViewController: UITextFieldDelegate {
             // Do not allow duplicates. If the user enters a duplicate, it will be moved to the top and
             // marked as not done yet
             if let index = AppData.shared.items.firstIndex(where: {$0.name.lowercased() == newName.lowercased()}){
-                
-                if AppData.shared.items[index].status { // If it's done
+                let currentItem = AppData.shared.items[index]
+                if currentItem.status { // If it's done
                     AppData.shared.items[index].status = false
                     let doneIndex = doneItems.firstIndex(where: {$0.name.lowercased() == AppData.shared.items[index].name.lowercased()})!
                     let thisItem = doneItems[doneIndex]
@@ -44,6 +44,8 @@ extension MainViewController: UITextFieldDelegate {
                 }
                 
                 tableView.reloadSections(IndexSet(integersIn: 0...1), with: .automatic)
+                
+                AppData.shared.writeItem(currentItem)
                 ReadWrite.write()
                 return true
             }
@@ -57,9 +59,10 @@ extension MainViewController: UITextFieldDelegate {
                 let newIndexPath = IndexPath(row: 0 , section: 0)
                 tableView.insertRows(at: [newIndexPath], with: .top)
             }
-            
+            AppData.shared.writeItem(newItem)
+            ReadWrite.write()
         }
-        ReadWrite.write()
+        
         return true
     }
 }

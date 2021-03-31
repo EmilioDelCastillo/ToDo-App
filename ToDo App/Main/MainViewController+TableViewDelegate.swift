@@ -63,6 +63,7 @@ extension MainViewController {
         // Update the model
         if let index = AppData.shared.items.firstIndex(where: {$0.name == thisItem.name}) {
             AppData.shared.items[index] = thisItem
+            AppData.shared.writeItem(thisItem)
             ReadWrite.write()
         }
     }

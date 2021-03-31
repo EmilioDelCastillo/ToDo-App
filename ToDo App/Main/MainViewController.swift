@@ -11,6 +11,7 @@ class MainViewController: UITableViewController {
     
     @IBOutlet var headerView: UIView!
     @IBOutlet weak var newItemTextField: UITextField!
+    @IBOutlet weak var userButton: UIButton!
     
     var activeItems = [Item]()
     var doneItems = [Item]()
@@ -21,11 +22,13 @@ class MainViewController: UITableViewController {
         
         let defaults = UserDefaults.standard
         
+        showLoginStatus()
+        
         if defaults.object(forKey: "firstUse") == nil {
             
             defaults.setValue("true", forKey: "firstUse")
             defaults.synchronize()
-            AppData.populate()
+            AppData.shared.populate()
             ReadWrite.write()
             
         } else {
@@ -38,5 +41,14 @@ class MainViewController: UITableViewController {
         newItemTextField.delegate = self
         newItemTextField.autocapitalizationType = .sentences
         tableView.tableFooterView = UIView()
+    }
+    
+    func showLoginStatus() {
+        
+        if AppData.shared.authentication.currentUser != nil {
+            userButton.tintColor = .green
+        } else {
+            userButton.tintColor = view.tintColor // Default tint color
+        }
     }
 }

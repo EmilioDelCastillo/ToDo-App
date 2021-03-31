@@ -45,6 +45,7 @@
                     <connections>
                         <outlet property="headerView" destination="mQR-MU-Dev" id="xns-8T-51w"/>
                         <outlet property="newItemTextField" destination="OZp-4I-yvS" id="1Xg-M7-tV3"/>
+                        <outlet property="userButton" destination="UB8-qX-IO3" id="aYz-bY-SbA"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vH3-S4-5a5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -74,11 +75,22 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" returnKeyType="done"/>
                         </textField>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UB8-qX-IO3">
+                            <rect key="frame" x="206" y="10" width="24" height="24"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="24" id="fhR-2K-yVf"/>
+                            </constraints>
+                            <state key="normal" image="person.fill" catalog="system"/>
+                            <connections>
+                                <action selector="authAction:" destination="OOW-cE-6gb" eventType="touchUpInside" id="Z8M-BO-Mvh"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <viewLayoutGuide key="safeArea" id="4g9-DH-qka"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstItem="c4c-eJ-aUh" firstAttribute="leading" secondItem="4g9-DH-qka" secondAttribute="leading" id="3zz-Lf-ppR"/>
+                        <constraint firstItem="UX2-WX-j2C" firstAttribute="trailing" secondItem="UB8-qX-IO3" secondAttribute="trailing" constant="10" id="A2s-tv-fXg"/>
                         <constraint firstItem="4g9-DH-qka" firstAttribute="trailing" secondItem="OZp-4I-yvS" secondAttribute="trailing" constant="10" id="NZb-WW-IO0"/>
                         <constraint firstItem="4g9-DH-qka" firstAttribute="trailing" secondItem="c4c-eJ-aUh" secondAttribute="trailing" id="a4Z-QB-9Jn"/>
                         <constraint firstItem="4g9-DH-qka" firstAttribute="bottom" secondItem="OZp-4I-yvS" secondAttribute="bottom" constant="10" id="c3x-DJ-zAv"/>
@@ -87,7 +99,9 @@
                         <constraint firstItem="4g9-DH-qka" firstAttribute="trailing" secondItem="UX2-WX-j2C" secondAttribute="trailing" id="cSf-Vb-dwM"/>
                         <constraint firstItem="UX2-WX-j2C" firstAttribute="leading" secondItem="4g9-DH-qka" secondAttribute="leading" id="dsc-f6-dR6"/>
                         <constraint firstItem="OZp-4I-yvS" firstAttribute="top" secondItem="c4c-eJ-aUh" secondAttribute="bottom" constant="10" id="sOc-Tx-kkP"/>
+                        <constraint firstItem="UB8-qX-IO3" firstAttribute="top" secondItem="UX2-WX-j2C" secondAttribute="top" constant="10" id="vkw-RF-G3B"/>
                         <constraint firstItem="c4c-eJ-aUh" firstAttribute="top" secondItem="UX2-WX-j2C" secondAttribute="bottom" id="wjM-ns-TWl"/>
+                        <constraint firstItem="UX2-WX-j2C" firstAttribute="bottom" secondItem="UB8-qX-IO3" secondAttribute="bottom" constant="10" id="za3-Xs-J5T"/>
                     </constraints>
                 </view>
             </objects>
@@ -95,6 +109,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
